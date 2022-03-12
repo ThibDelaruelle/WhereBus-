@@ -40,7 +40,7 @@ export class MapComponent implements OnInit {
       this.busService.getBusesGoodnumbers(uselessdata.nhits).subscribe(data => {
         data.records.forEach(bus => {
       
-          L.marker([bus.fields.coordonnees[0],bus.fields.coordonnees[1]]).addTo(this.map).bindPopup("Ligne : "+bus.fields.nomcourtligne).addTo(this.map);
+          L.marker([bus.fields.coordonnees[0],bus.fields.coordonnees[1]]).addTo(this.map).bindPopup("Ligne : "+bus.fields.nomcourtligne +"\nDirection : "+bus.fields.destination).addTo(this.map);
         });
       })
 
