@@ -1,6 +1,8 @@
+import { BusService } from './../bus.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import  * as L from 'leaflet';
 import 'mapbox-gl-leaflet';
+import { StarBus } from './../bus.service';
 
 @Component({
   selector: 'app-map',
@@ -10,13 +12,14 @@ import 'mapbox-gl-leaflet';
 export class MapComponent implements OnInit {
 
   private map: L.Map;
-  constructor() { }
+  constructor(private busService: BusService) { }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit() {
     this.initMap()
+    this.printBus()
   }
 
   private initMap() : void{
@@ -29,7 +32,18 @@ export class MapComponent implements OnInit {
     });
 
     tiles.addTo(this.map);
+  }
 
+  private printBus() :void{
+    //console.log(this.busService.getBuses())
+    this.busService.getBuses().subscribe(data => {
+      data.records.forEach(bus => {
+      
+        L.marker([bus.fields.coordonnees[0],bus.fields.coordonnees[1]]).addTo(this.map).bindPopup(bus.fields.nomcourtligne).addTo(this.map);
+      });
+    })
+    
+   
   }
   
 

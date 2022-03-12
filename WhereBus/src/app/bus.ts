@@ -1,7 +1,15 @@
-export interface bus {
+export class bus {
     numerobus : number;
-    sens : number;
+    sens : String;
     nomcourtligne : String;
     destination : String;
-    coordonees : number[];
+    coordonnees : number[];
+
+    public constructor(numerobus : number, sens : String, nomcourtligne :String, destination : String, coordonnees : number[]){
+        this.numerobus = numerobus;
+        this.sens = sens;
+        this.nomcourtligne = nomcourtligne;
+        this.destination = destination;
+        this.coordonnees = coordonnees;
+    }
 }
