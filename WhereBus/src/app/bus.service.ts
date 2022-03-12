@@ -52,4 +52,8 @@ export class BusService {
       return this.http.get<StarBus>(this.url);
   }
 
+  public getBusesGoodnumbers(num : number): Observable<StarBus>{
+    return this.http.get<StarBus>("https://data.explore.star.fr/api/records/1.0/search/?dataset=tco-bus-vehicules-position-tr&q=&facet=numerobus&facet=nomcourtligne&facet=sens&facet=destination&refine.etat=En+ligne&rows="+num);
+  }
+
 }  

@@ -36,11 +36,15 @@ export class MapComponent implements OnInit {
 
   private printBus() :void{
     //console.log(this.busService.getBuses())
-    this.busService.getBuses().subscribe(data => {
-      data.records.forEach(bus => {
+    this.busService.getBuses().subscribe(uselessdata => {
+      this.busService.getBusesGoodnumbers(uselessdata.nhits).subscribe(data => {
+        data.records.forEach(bus => {
       
-        L.marker([bus.fields.coordonnees[0],bus.fields.coordonnees[1]]).addTo(this.map).bindPopup(bus.fields.nomcourtligne).addTo(this.map);
-      });
+          L.marker([bus.fields.coordonnees[0],bus.fields.coordonnees[1]]).addTo(this.map).bindPopup("Ligne : "+bus.fields.nomcourtligne).addTo(this.map);
+        });
+      })
+
+     
     })
     
    
